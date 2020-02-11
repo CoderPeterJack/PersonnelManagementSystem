@@ -1,4 +1,4 @@
-package com.jp.vhr_2020.controller;
+package com.jp.vhr_2020.controller.config;
 
 import com.jp.vhr_2020.model.Menu;
 import com.jp.vhr_2020.service.MenuService;

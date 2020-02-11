@@ -1,4 +1,4 @@
-package com.jp.vhr_2020.controller;
+package com.jp.vhr_2020.controller.test;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

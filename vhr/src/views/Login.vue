@@ -50,9 +50,11 @@
                                 if (resp){
                                     //如果成功打印信息
                                     window.sessionStorage.setItem("user",JSON.stringify(resp.obj));
+                                    //查询拿到path
+                                    let path=this.$route.query.redirect;
                                     ////页面跳转，replace将会替换当前页面
                                     ////push将会新建一个页面
-                                    this.$router.replace('/home');
+                                    this.$router.replace((path=='/'||path==undefined)?'/home':path);
                                 }
                         })
                         //alert('submit!');

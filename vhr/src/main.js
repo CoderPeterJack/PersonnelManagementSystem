@@ -37,8 +37,9 @@ router.beforeEach((to, from,  next) => {
       initMenu(router,store);
       next();
     }else{
+      console.log(to);
       //如果没有登录
-      next('/');
+      next('/?redirect='+to.path);
     }
   }
 })
