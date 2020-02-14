@@ -41,6 +41,24 @@
       <result column="rnameZh" property="nameZh"/>
     </collection>
   </resultMap>
+  <resultMap id="MenuWithChildren" type="com.jp.vhr_2020.model.Menu" extends="BaseResultMap">
+    <id column="id1" property="id"/>
+    <result column="name1" property="name"/>
+    <collection property="children" ofType="com.jp.vhr_2020.model.Menu">
+      <id column="id2" property="id"/>
+      <result column="name2" property="name"/>
+      <collection property="children" ofType="com.jp.vhr_2020.model.Menu">
+        <id column="id3" property="id"/>
+        <result column="name3" property="name"/>
+      </collection>
+    </collection>
+  </resultMap>
+  <select id="getMidsByRid" resultType="java.lang.Integer">
+select menu_role.mid from menu_role where rid=#{rid};
+  </select>
+  <select id="getAllMenus" resultMap="MenuWithChildren">
+    SELECT m1.id as id1,m1.name as name1,m2.id as id2,m2.name as name2,m3.id as id3,m3.name as name3 from menu m1,menu m2,menu m3 where m1.id=m2.parentId and m2.id=m3.parentId and m3.enabled=true ORDER BY m1.id,m2.id,m3.id
+  </select>
   <select id="getAllMenusWithRole" resultMap="MenusWithRole">
     SELECT m.*,r.`id` AS rid,r.`name` AS rname,r.`nameZh` AS rnameZh FROM menu m,menu_role mr,role r WHERE m.`id`=mr.`mid` AND mr.`rid`=r.`id` ORDER BY m.`id`
   </select>

@@ -35,8 +35,18 @@
                 </el-table-column>
                 <el-table-column
                         prop="createDate"
-                        width="150"
+                        width="120"
                         label="创建时间">
+                </el-table-column>
+                <el-table-column
+                        label="是否启用">
+<!--                    slot-scope="scope"来取得作用域插槽:data绑定-->
+<!--                    的数据，scope可以随便替换其他名称，只是定义对象-->
+<!--                    来代表取得的data数据，用于使用而已。-->
+                    <template slot-scope="scope">
+                        <el-tag size="small" type="success" v-if="scope.row.enabled">已启用</el-tag>
+                        <el-tag size="small" type="danger" v-else >未启用</el-tag>
+                    </template>
                 </el-table-column>
                 <!--scope.row为那一行的json对象-->
                 <el-table-column label="操作">
@@ -60,9 +70,20 @@
                 :visible.sync="dialogVisible"
                 width="30%">
            <div>
-               <el-tag>职位名称</el-tag>
-               <el-input class="updatePosInput" size="small" v-model="updatePos.name"></el-input>
-           </div>
+               <div>
+                   <el-tag>职位名称</el-tag>
+                   <el-input class="updatePosInput" size="small" v-model="updatePos.name"></el-input>
+               </div>
+               <div style="margin-top: 5px">
+                   <el-tag>是否启用</el-tag>
+                   <el-switch
+                           style="margin-left: 5px"
+                           v-model="updatePos.enabled"
+                           active-text="启用"
+                           inactive-text="未启用">
+                   </el-switch>
+               </div>
+                 </div>
             <span slot="footer" class="dialog-footer">
     <el-button size="small" @click="dialogVisible = false">取 消</el-button>
     <el-button size="small" type="primary" @click="doUpdate">确 定</el-button>
@@ -84,7 +105,8 @@
                 dialogVisible:false,
                 //职位的名称提前展示处理
                 updatePos:{
-                  name:''
+                  name:'',
+                    enabled:false
                 },
                 // 表格数据是json数组
                 positions: [],

@@ -4,11 +4,14 @@
   <resultMap id="BaseResultMap" type="com.jp.vhr_2020.model.Role" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="nameZh" property="namezh" jdbcType="VARCHAR" />
+    <result column="nameZh" property="nameZh" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, nameZh
   </sql>
+  <select id="getAllRoles" resultMap="BaseResultMap">
+    select * from role;
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -22,7 +25,7 @@
   <insert id="insert" parameterType="com.jp.vhr_2020.model.Role" >
     insert into role (id, name, nameZh
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{namezh,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nameZh,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jp.vhr_2020.model.Role" >
@@ -34,7 +37,7 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="namezh != null" >
+      <if test="nameZh != null" >
         nameZh,
       </if>
     </trim>
@@ -45,8 +48,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="namezh != null" >
-        #{namezh,jdbcType=VARCHAR},
+      <if test="nameZh != null" >
+        #{nameZh,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -56,8 +59,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="namezh != null" >
-        nameZh = #{namezh,jdbcType=VARCHAR},
+      <if test="nameZh != null" >
+        nameZh = #{nameZh,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -65,7 +68,7 @@
   <update id="updateByPrimaryKey" parameterType="com.jp.vhr_2020.model.Role" >
     update role
     set name = #{name,jdbcType=VARCHAR},
-      nameZh = #{namezh,jdbcType=VARCHAR}
+      nameZh = #{nameZh,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

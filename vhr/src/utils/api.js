@@ -3,7 +3,7 @@ import axios from 'axios';
 import{
      Message
  } from 'element-ui';
-
+import router from '../router';
 
  //响应拦截器
  axios.interceptors.response.use(success => {
@@ -25,7 +25,9 @@ import{
      } else if (error.response.status == 403) {
          Message.error({message: '权限不足，请联系管理员'});
      } else if (error.response.status == 401) {
-         Message.error({message: '尚未登录，请登录1222'});
+         Message.error({message: '尚未登录，请登录'});
+         //回到登录页
+         router.replace('/');
      } else {
          if (error.response.data.msg) {
              Message.error({message: error.response.data.msg});

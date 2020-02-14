@@ -9,6 +9,15 @@
   <sql id="Base_Column_List" >
     id, mid, rid
   </sql>
+  <delete id="deleteByRid">
+delete from menu_role where rid=#{rid}
+  </delete>
+  <insert id="insertRecord">
+insert into menu_role (mid, rid) values
+<foreach collection="mids" separator="," item="mid">
+  (#{mid},#{rid})
+</foreach>
+  </insert>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

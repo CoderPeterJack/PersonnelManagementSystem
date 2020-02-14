@@ -62,6 +62,7 @@ select * from position;
       </if>
     </trim>
   </insert>
+
 <!--  批量删除-->
   <delete id="deletePositionsByIds">
     delete from position where id in
