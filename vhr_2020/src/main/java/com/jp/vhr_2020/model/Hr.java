@@ -1,5 +1,6 @@
 package com.jp.vhr_2020.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -113,6 +114,8 @@ public class Hr implements UserDetails {
     }
 
     @Override
+//    返回json时忽略它，因为前端不需要authorities信息
+    @JsonIgnore
     //返回用户的角色
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities=new ArrayList<>(roles.size());

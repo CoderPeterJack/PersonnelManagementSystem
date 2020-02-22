@@ -46,9 +46,16 @@ public class MenuService {
     }
 
     //添加事务，删除和添加要一起
+    //rid为需要删除权限的用户，mids为需要添加的权限
     @Transactional
     public boolean updateMenuRole(Integer rid, Integer[] mids) {
+        //先删除选中二点rid
         menuRoleMapper.deleteByRid(rid);
+        //再判断
+        if (mids==null||mids.length==0){
+            return true;
+        }
+        //再执行插入
         Integer result=menuRoleMapper.insertRecord(rid,mids);
         return result==mids.length;
     }

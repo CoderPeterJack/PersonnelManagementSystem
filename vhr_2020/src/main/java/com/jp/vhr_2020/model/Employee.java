@@ -1,5 +1,7 @@
 package com.jp.vhr_2020.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Employee {
@@ -9,17 +11,18 @@ public class Employee {
 
     private String gender;
 
+    @JsonFormat(pattern = "yyyy-MM-DD",timezone = "Asia/Shanghai")
     private Date birthday;
 
-    private String idcard;
+    private String idCard;
 
     private String wedlock;
 
-    private Integer nationid;
+    private Integer nationId;
 
-    private String nativeplace;
+    private String nativePlace;
 
-    private Integer politicid;
+    private Integer politicId;
 
     private String email;
 
@@ -27,37 +30,92 @@ public class Employee {
 
     private String address;
 
-    private Integer departmentid;
+    private Integer departmentId;
 
-    private Integer joblevelid;
+    private Integer jobLevelId;
 
-    private Integer posid;
+    private Integer posId;
 
-    private String engageform;
+    private String engageForm;
 
-    private String tiptopdegree;
+    private String tiptopDegree;
 
     private String specialty;
 
     private String school;
 
-    private Date begindate;
+    @JsonFormat(pattern = "yyyy-MM-DD",timezone = "Asia/Shanghai")
+    private Date beginDate;
 
-    private String workstate;
+    private String workState;
 
-    private String workid;
+    private String workId;
 
-    private Double contractterm;
 
-    private Date conversiontime;
+    private Double contractTerm;
 
-    private Date notworkdate;
+    @JsonFormat(pattern = "yyyy-MM-DD",timezone = "Asia/Shanghai")
+    private Date conversionTime;
 
-    private Date begincontract;
+    private Date notWorkDate;
 
-    private Date endcontract;
+    @JsonFormat(pattern = "yyyy-MM-DD",timezone = "Asia/Shanghai")
+    private Date beginContract;
 
-    private Integer workage;
+    @JsonFormat(pattern = "yyyy-MM-DD",timezone = "Asia/Shanghai")
+    private Date endContract;
+
+    private Integer workAge;
+
+    private Nation nation;
+
+    private Politicsstatus politicsstatus;
+
+    private Department department;
+
+    private JobLevel jobLevel;
+
+    private Position position;
+
+    public Nation getNation() {
+        return nation;
+    }
+
+    public void setNation(Nation nation) {
+        this.nation = nation;
+    }
+
+    public Politicsstatus getPoliticsstatus() {
+        return politicsstatus;
+    }
+
+    public void setPoliticsstatus(Politicsstatus politicsstatus) {
+        this.politicsstatus = politicsstatus;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public JobLevel getJobLevel() {
+        return jobLevel;
+    }
+
+    public void setJobLevel(JobLevel jobLevel) {
+        this.jobLevel = jobLevel;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 
     public Integer getId() {
         return id;
@@ -72,7 +130,7 @@ public class Employee {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getGender() {
@@ -80,7 +138,7 @@ public class Employee {
     }
 
     public void setGender(String gender) {
-        this.gender = gender == null ? null : gender.trim();
+        this.gender = gender;
     }
 
     public Date getBirthday() {
@@ -91,12 +149,12 @@ public class Employee {
         this.birthday = birthday;
     }
 
-    public String getIdcard() {
-        return idcard;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setIdcard(String idcard) {
-        this.idcard = idcard == null ? null : idcard.trim();
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     public String getWedlock() {
@@ -104,31 +162,31 @@ public class Employee {
     }
 
     public void setWedlock(String wedlock) {
-        this.wedlock = wedlock == null ? null : wedlock.trim();
+        this.wedlock = wedlock;
     }
 
-    public Integer getNationid() {
-        return nationid;
+    public Integer getNationId() {
+        return nationId;
     }
 
-    public void setNationid(Integer nationid) {
-        this.nationid = nationid;
+    public void setNationId(Integer nationId) {
+        this.nationId = nationId;
     }
 
-    public String getNativeplace() {
-        return nativeplace;
+    public String getNativePlace() {
+        return nativePlace;
     }
 
-    public void setNativeplace(String nativeplace) {
-        this.nativeplace = nativeplace == null ? null : nativeplace.trim();
+    public void setNativePlace(String nativePlace) {
+        this.nativePlace = nativePlace;
     }
 
-    public Integer getPoliticid() {
-        return politicid;
+    public Integer getPoliticId() {
+        return politicId;
     }
 
-    public void setPoliticid(Integer politicid) {
-        this.politicid = politicid;
+    public void setPoliticId(Integer politicId) {
+        this.politicId = politicId;
     }
 
     public String getEmail() {
@@ -136,7 +194,7 @@ public class Employee {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public String getPhone() {
@@ -144,7 +202,7 @@ public class Employee {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public String getAddress() {
@@ -152,47 +210,47 @@ public class Employee {
     }
 
     public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+        this.address = address;
     }
 
-    public Integer getDepartmentid() {
-        return departmentid;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartmentid(Integer departmentid) {
-        this.departmentid = departmentid;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public Integer getJoblevelid() {
-        return joblevelid;
+    public Integer getJobLevelId() {
+        return jobLevelId;
     }
 
-    public void setJoblevelid(Integer joblevelid) {
-        this.joblevelid = joblevelid;
+    public void setJobLevelId(Integer jobLevelId) {
+        this.jobLevelId = jobLevelId;
     }
 
-    public Integer getPosid() {
-        return posid;
+    public Integer getPosId() {
+        return posId;
     }
 
-    public void setPosid(Integer posid) {
-        this.posid = posid;
+    public void setPosId(Integer posId) {
+        this.posId = posId;
     }
 
-    public String getEngageform() {
-        return engageform;
+    public String getEngageForm() {
+        return engageForm;
     }
 
-    public void setEngageform(String engageform) {
-        this.engageform = engageform == null ? null : engageform.trim();
+    public void setEngageForm(String engageForm) {
+        this.engageForm = engageForm;
     }
 
-    public String getTiptopdegree() {
-        return tiptopdegree;
+    public String getTiptopDegree() {
+        return tiptopDegree;
     }
 
-    public void setTiptopdegree(String tiptopdegree) {
-        this.tiptopdegree = tiptopdegree == null ? null : tiptopdegree.trim();
+    public void setTiptopDegree(String tiptopDegree) {
+        this.tiptopDegree = tiptopDegree;
     }
 
     public String getSpecialty() {
@@ -200,7 +258,7 @@ public class Employee {
     }
 
     public void setSpecialty(String specialty) {
-        this.specialty = specialty == null ? null : specialty.trim();
+        this.specialty = specialty;
     }
 
     public String getSchool() {
@@ -208,78 +266,78 @@ public class Employee {
     }
 
     public void setSchool(String school) {
-        this.school = school == null ? null : school.trim();
+        this.school = school;
     }
 
-    public Date getBegindate() {
-        return begindate;
+    public Date getBeginDate() {
+        return beginDate;
     }
 
-    public void setBegindate(Date begindate) {
-        this.begindate = begindate;
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
     }
 
-    public String getWorkstate() {
-        return workstate;
+    public String getWorkState() {
+        return workState;
     }
 
-    public void setWorkstate(String workstate) {
-        this.workstate = workstate == null ? null : workstate.trim();
+    public void setWorkState(String workState) {
+        this.workState = workState;
     }
 
-    public String getWorkid() {
-        return workid;
+    public String getWorkId() {
+        return workId;
     }
 
-    public void setWorkid(String workid) {
-        this.workid = workid == null ? null : workid.trim();
+    public void setWorkId(String workId) {
+        this.workId = workId;
     }
 
-    public Double getContractterm() {
-        return contractterm;
+    public Double getContractTerm() {
+        return contractTerm;
     }
 
-    public void setContractterm(Double contractterm) {
-        this.contractterm = contractterm;
+    public void setContractTerm(Double contractTerm) {
+        this.contractTerm = contractTerm;
     }
 
-    public Date getConversiontime() {
-        return conversiontime;
+    public Date getConversionTime() {
+        return conversionTime;
     }
 
-    public void setConversiontime(Date conversiontime) {
-        this.conversiontime = conversiontime;
+    public void setConversionTime(Date conversionTime) {
+        this.conversionTime = conversionTime;
     }
 
-    public Date getNotworkdate() {
-        return notworkdate;
+    public Date getNotWorkDate() {
+        return notWorkDate;
     }
 
-    public void setNotworkdate(Date notworkdate) {
-        this.notworkdate = notworkdate;
+    public void setNotWorkDate(Date notWorkDate) {
+        this.notWorkDate = notWorkDate;
     }
 
-    public Date getBegincontract() {
-        return begincontract;
+    public Date getBeginContract() {
+        return beginContract;
     }
 
-    public void setBegincontract(Date begincontract) {
-        this.begincontract = begincontract;
+    public void setBeginContract(Date beginContract) {
+        this.beginContract = beginContract;
     }
 
-    public Date getEndcontract() {
-        return endcontract;
+    public Date getEndContract() {
+        return endContract;
     }
 
-    public void setEndcontract(Date endcontract) {
-        this.endcontract = endcontract;
+    public void setEndContract(Date endContract) {
+        this.endContract = endContract;
     }
 
-    public Integer getWorkage() {
-        return workage;
+    public Integer getWorkAge() {
+        return workAge;
     }
 
-    public void setWorkage(Integer workage) {
-        this.workage = workage;
+    public void setWorkAge(Integer workAge) {
+        this.workAge = workAge;
     }
 }

@@ -6,6 +6,7 @@
                 v-model="filterText">
         </el-input>
 
+<!--        :data="deps"为要显示的数据-->
         <el-tree
                 :data="deps"
                 :props="defaultProps"
@@ -14,6 +15,8 @@
                 ref="tree">
 
 <!--            node指当前元素，data当前node的json对象-->
+<!--            通过 Scoped slot 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据，用法参考 demo。-->
+<!--            slot-scope="{ node, data }"自定义树节点的内容，参数为 { node, data }-->
             <span class="custom-tree-node" style="display: flex;justify-content: space-between;width: 100%;" slot-scope="{ node, data }">
         <span>{{ data.name }}</span>
         <span>
@@ -33,7 +36,6 @@
           </el-button>
         </span>
       </span>
-
         </el-tree>
 
         <el-dialog
@@ -75,6 +77,7 @@
                     parentId:-1
                 },
                 pname:[],
+                // 接收后端传过来的json数据
                 deps:[],
                 defaultProps: {
                     //前端显示
@@ -110,6 +113,10 @@
                     let d=deps[i];
                     if (d.id==dep.parentId){
                         d.children=d.children.concat(dep);
+                        //0220更新
+                        if (d.children.length>0){
+                            d.parent=true;
+                        }
                         return;
                     }else{
                         this.addDep2Deps(d.children,dep);
@@ -117,23 +124,65 @@
                 }
             },
             doAddDep(){
-                this.postRequest("/system/basic/department/",this.dep).then(resp=>{
-                    if (resp){
-                        //返回的resp对象加入到deps中就不会折叠了
-                        this.addDep2Deps(this.deps,resp.obj);
-                        this.dialogVisible=false;
-                        //这是初始化变量
-                        this.initDep();
-                    }
-                })
+                //添加的数据不能为空
+                if (this.dep.name){
+                    this.postRequest("/system/basic/department/",this.dep).then(resp=>{
+                        if (resp){
+                            //返回的resp对象加入到deps中就不会折叠了
+                            this.addDep2Deps(this.deps,resp.obj);
+                            this.dialogVisible=false;
+                            //这是初始化变量
+                            this.initDep();
+                        }
+                    })
+                }else{
+                    this.$message.error("添加失败");
+                }
             },
             showAddDepView(data){
                 this.pname=data.name;
                 this.dep.parentId=data.id;
                 this.dialogVisible=true;
             },
+            removeDepFromDeps(p,deps,id){
+                for (let i=0;i<deps.length;i++){
+                    let d=deps[i];
+                    if (d.id==id){
+                        deps.splice(i,1);
+                        //判断父部门的属性是否为0
+                        if (deps.length==0){
+                            p.parent=false;
+                        }
+                        return;
+                    }else {
+                        this.removeDepFromDeps(d,d.children,id);
+                    }
+
+                }
+    },
             deleteDep(data){
-                console.log(data)
+                //如果是data.parent=true说明父部门下面还有子部门
+                if (data.parent){
+                    this.$message.error("父部门删除失败");
+                }else {
+                    this.$confirm('此操作将永久删除该文件【'+data.name+'】部门, 是否继续?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        this.deleteRequest("/system/basic/department/"+data.id).then(resp=>{
+                            if (resp){
+                                this.removeDepFromDeps(null,this.deps,data.id);
+                            }
+                        })
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消删除'
+                        });
+                    });
+                }
+
             },
             initDeps(){
                 this.getRequest("/system/basic/department/").then(resp=>{

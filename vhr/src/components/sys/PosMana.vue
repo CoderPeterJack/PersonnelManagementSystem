@@ -6,6 +6,10 @@
                     class="addPosInput"
                     placeholder="添加职位"
                     prefix-icon="el-icon-plus"
+                    v-loading="loading"
+                    element-loading-text="正在加载..."
+                    element-loading-spinner="el-icon-loading"
+                    element-loading-background="rgba(0, 0, 0, 0.8)"
                     @keydown.enter.native="addPosition"
                     v-model="pos.name">
             </el-input>
@@ -98,6 +102,7 @@
         // json形式上传
         data(){
             return{
+                loading:false,
                 pos:{
                     name:''
                 },
@@ -198,7 +203,9 @@
               console.log(val);
             },
             initPositions(){
+                this.loading=true;
                 this.getRequest("system/basic/pos/").then(resp=>{
+                    this.loading=false;
                     if(resp){
                         this.positions=resp;
                     }

@@ -14,9 +14,25 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
 
+  <resultMap id="HrWithRoles" type="com.jp.vhr_2020.model.Hr" extends="BaseResultMap">
+    <collection property="roles" ofType="com.jp.vhr_2020.model.Role">
+      <id column="rid" property="id"/>
+      <result column="rname" property="name"/>
+      <result column="rnameZh" property="nameZh"/>
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, phone, telephone, address, enabled, username, password, userface, remark
   </sql>
+
+  <select id="getAllHrs" resultMap="HrWithRoles">
+SELECT  hr.id, hr.name, hr.phone, hr.telephone, hr.address, hr.enabled, hr.username, hr.userface, hr.remark,r.`id` AS rid,r.`name` AS rname,r.`nameZh` AS rnameZh FROM hr LEFT JOIN hr_role hrr ON hr.`id`=hrr.`hrid` LEFT JOIN role r ON hrr.`rid`=r.`id`
+WHERE hr.`id`!=#{hrid}
+<if test= "keywords!=null">
+and hr.name like concat('%',#{keywords},'%')
+</if>
+order by hr.id
+  </select>
   <select id="getHrRolesById" resultType="com.jp.vhr_2020.model.Role">
 SELECT r.* FROM role r,hr_role hrr WHERE hrr.`rid`=r.`id` AND hrr.`hrid`=#{id}
   </select>

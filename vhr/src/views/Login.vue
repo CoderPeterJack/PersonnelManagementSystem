@@ -5,6 +5,10 @@
     <div>
         <el-form :rules="rules"
                  ref="loginForm"
+                 v-loading="loading"
+                 element-loading-text="正在登陆..."
+                 element-loading-spinner="el-icon-loading"
+                 element-loading-background="rgba(0, 0, 0, 0.8)"
                  :model="loginForm"
                  class="loginContainer">
             <h3 class="loginTitle">系统登录</h3>
@@ -30,6 +34,7 @@
         name: "Login",
         data() {
             return {
+                loading:false,
                 loginForm: {
                     username:'admin',
                     password:'123',
@@ -46,7 +51,9 @@
             submitLogin(){
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
-                       postKeyValueRequest('/doLogin',this.loginForm).then(resp=>{
+                        this.loading=true;
+                       this.postKeyValueRequest('/doLogin',this.loginForm).then(resp=>{
+                           this.loading=false;
                                 if (resp){
                                     //如果成功打印信息
                                     window.sessionStorage.setItem("user",JSON.stringify(resp.obj));

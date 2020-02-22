@@ -22,7 +22,9 @@
   <select id="addDep" statementType="CALLABLE">
 call addDep(#{name,mode=IN,jdbcType=VARCHAR},#{parentId,mode=IN,jdbcType=INTEGER},#{enabled,mode=IN,jdbcType=BOOLEAN},#{result,mode=OUT,jdbcType=INTEGER},#{id,mode=OUT,jdbcType=INTEGER})
   </select>
-
+  <select id="deleteDepById" statementType="CALLABLE">
+    call deleteDep(#{id,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
+  </select>
   <select id="getAllDepartmentsByParentId" resultMap="DepartmentWithChildren">
 select * from department where parentId=#{pid};
   </select>

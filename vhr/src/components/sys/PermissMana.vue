@@ -5,7 +5,15 @@
                 <template slot="prepend" size="small">ROLE_</template>
             </el-input>
             <el-input size="small" style="width: 300px;margin-left: 5px" placeholder="请输入角色中文名称" v-model="role.nameZh" @keydown.enter.native="doAddRole"></el-input>
-            <el-button type="primary" size="small" style="margin-left: 5px" @click="doAddRole">添加角色</el-button>
+            <el-button
+                    type="primary"
+                    size="small"
+                    v-loading="loading"
+                    element-loading-text="正在加载..."
+                    element-loading-spinner="el-icon-loading"
+                    element-loading-background="rgba(0, 0, 0, 0.8)"
+                    style="margin-left: 5px"
+                    @click="doAddRole">添加角色</el-button>
         </div>
         <div class="permissManaMain">
             <el-collapse accordion @change="change" v-model="activeName">
@@ -47,6 +55,7 @@
         //数据定义
         data(){
             return{
+                loading:false,
                 role:{
                     name:'',
                     nameZh:''
@@ -155,7 +164,9 @@
                 })
             },
             initRoles(){
+                this.loading=true;
                 this.getRequest("system/basic/permiss/").then(resp=>{
+                    this.loading=false;
                     if (resp){
                         this.roles=resp;
                     }
