@@ -112,10 +112,10 @@ public class EmpBasicController {
         return POIUtils.employee2Excel(list);
     }
 
-    //导入数据
-    @PostMapping("/import")
-    public RespBean importData(MultipartFile file) throws IOException {
-        file.transferTo(new File("D:\\jp.xls"));
-        return RespBean.ok("上传成功");
-    }
+//    //导入数据
+//    @PostMapping("/import")
+//    public RespBean importData(MultipartFile file) throws IOException {
+//        List<Employee> list=POIUtils.excel2Employee(file.);
+//        return RespBean.ok("上传成功");
+//    }
 }
