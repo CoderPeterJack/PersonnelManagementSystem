@@ -34,13 +34,13 @@ public class EmployeeService {
         return employeeMapper.deleteByPrimaryKey(id);
     }
 
-    public RespPageBean getEmployeeByPage(Integer page, Integer size,String keyword) {
+    public RespPageBean getEmployeeByPage(Integer page, Integer size,Employee employee, Date[] beginDateScope) {
         if (page!=null&&size!=null){
             //重新赋值
             page=(page-1)*size;
         }
-        List<Employee> data=employeeMapper.getEmployeeByPage(page,size,keyword);
-        Long total=employeeMapper.getTotal(keyword);
+        List<Employee> data=employeeMapper.getEmployeeByPage(page,size,employee,beginDateScope);
+        Long total=employeeMapper.getTotal(employee,beginDateScope);
         RespPageBean bean=new RespPageBean();
         bean.setData(data);
         bean.setTotal(total);
@@ -65,5 +65,9 @@ public class EmployeeService {
 
     public Integer updateEmp(Employee employee) {
         return employeeMapper.updateByPrimaryKeySelective(employee);
+    }
+
+    public Integer addEmps(List<Employee> list) {
+        return employeeMapper.addEmps(list);
     }
 }

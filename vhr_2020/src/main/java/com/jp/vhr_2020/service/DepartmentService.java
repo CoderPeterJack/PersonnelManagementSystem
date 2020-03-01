@@ -31,4 +31,8 @@ public class DepartmentService {
     public void deleteDepById(Department dep) {
         departmentMapper.deleteDepById(dep);
     }
+
+    public List<Department> getAllDepartmentsWithOutChildren() {
+        return departmentMapper.getAllDepartmentsWithOutChildren();
+    }
 }

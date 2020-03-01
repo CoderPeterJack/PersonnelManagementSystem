@@ -14,9 +14,17 @@
     <collection property="children" ofType="com.jp.vhr_2020.model.Department"
                 select="com.jp.vhr_2020.mapper.DepartmentMapper.getAllDepartmentsByParentId" column="id"/>
   </resultMap>
+
   <sql id="Base_Column_List" >
     id, name, parentId, depPath, enabled, isParent
   </sql>
+
+  <select id="getAllDepartmentsWithOutChildren" resultMap="BaseResultMap">
+select
+<include refid="Base_Column_List">
+</include>
+from department;
+  </select>
 
 <!--  存储过程-->
   <select id="addDep" statementType="CALLABLE">

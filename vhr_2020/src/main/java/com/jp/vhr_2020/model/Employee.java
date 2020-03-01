@@ -77,6 +77,45 @@ public class Employee {
 
     private Position position;
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthday=" + birthday +
+                ", idCard='" + idCard + '\'' +
+                ", wedlock='" + wedlock + '\'' +
+                ", nationId=" + nationId +
+                ", nativePlace='" + nativePlace + '\'' +
+                ", politicId=" + politicId +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", departmentId=" + departmentId +
+                ", jobLevelId=" + jobLevelId +
+                ", posId=" + posId +
+                ", engageForm='" + engageForm + '\'' +
+                ", tiptopDegree='" + tiptopDegree + '\'' +
+                ", specialty='" + specialty + '\'' +
+                ", school='" + school + '\'' +
+                ", beginDate=" + beginDate +
+                ", workState='" + workState + '\'' +
+                ", workId='" + workId + '\'' +
+                ", contractTerm=" + contractTerm +
+                ", conversionTime=" + conversionTime +
+                ", notWorkDate=" + notWorkDate +
+                ", beginContract=" + beginContract +
+                ", endContract=" + endContract +
+                ", workAge=" + workAge +
+                ", nation=" + nation +
+                ", politicsstatus=" + politicsstatus +
+                ", department=" + department +
+                ", jobLevel=" + jobLevel +
+                ", position=" + position +
+                '}';
+    }
+
     public Nation getNation() {
         return nation;
     }

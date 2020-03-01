@@ -25,6 +25,7 @@ public class MenuService {
     MenuMapper menuMapper;
     @Autowired
     MenuRoleMapper menuRoleMapper;
+
     public List<Menu> getMenusByHrId(){
         return menuMapper.getMenusByHrId(((Hr)SecurityContextHolder
                 .getContext().getAuthentication()

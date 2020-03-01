@@ -1,6 +1,7 @@
 package com.jp.vhr_2020.model;
 import	java.util.ArrayList;
 import	java.util.List;
+import java.util.Objects;
 
 public class Department {
     private Integer id;
@@ -18,6 +19,26 @@ public class Department {
     private List<Department> children=new ArrayList<Department> ();
 
     private Integer result;
+
+    public Department(String name) {
+        this.name = name;
+    }
+
+    public Department() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 
     public Integer getResult() {
         return result;

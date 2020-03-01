@@ -3,11 +3,33 @@ package com.jp.vhr_2020.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Position {
     private Integer id;
 
     private String name;
+
+    public Position(String name) {
+        this.name = name;
+    }
+
+
+    public Position() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return Objects.equals(name, position.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 
     //处理时间格式问题
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
